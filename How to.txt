@@ -1,0 +1,70 @@
+npm init -y
+npm i express cors dotenv bcrypt jsonwebtoken zod sequelize mysql2
+npm i -D nodemon sequelize-cli
+
+npx sequelize-cli init
+
+npx sequelize-cli db:create
+
+
+7. Run Migrations
+npm run db:migrate
+
+8. Undo last migration:
+npm run db:migrate:undo
+
+9. Undo all migrations:
+npm run db:migrate:undo:all
+
+10. Generate a seeder:
+npx sequelize-cli seed:generate --name demo-user
+
+11. Run the seeder:
+npm run db:seed
+
+
+12. Undo seed:
+npm run db:seed:undo
+
+--------------------------------------------------------------------
+
+9. Altering Tables
+If you need to add a column:
+npx sequelize-cli migration:generate --name add-age-to-user
+
+Edit migration file:
+export async function up(queryInterface, Sequelize) {
+  await queryInterface.addColumn('Users', 'age', {
+    type: Sequelize.INTEGER,
+    allowNull: true
+  });
+}
+
+export async function down(queryInterface, Sequelize) {
+  await queryInterface.removeColumn('Users', 'age');
+}
+
+
+Run:
+npm run db:migrate
+
+
+This is the file structure of this project
+driving-school-backend/
+│
+├── migrations/
+├── seeders/
+│
+├── src/
+│   ├── config/
+│   │   └── config.js
+│   ├── models/
+│   │   ├── index.js
+│   │   └── user.js
+│   └── index.js
+│
+├── .env
+├── .sequelizerc
+├── nodemon.json
+├── package-lock.json
+└── package.json

@@ -1,0 +1,5 @@
+{
+  "watch": ["src", "config", "models", "migrations", "seeders"],
+  "ext": "js,mjs,json",
+  "exec": "node src/index.js"
+}
