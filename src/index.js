@@ -3,6 +3,8 @@ import { sequelize } from "./models/index.js";
 import cors from "cors";
 import dotenv from "dotenv";
 import userRoutes from "../routes/userRoutes.js";
+import courseRoutes from "../routes/courseRoutes.js";
+import faqRoutes from "../routes/faqRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -13,6 +15,8 @@ app.use(express.json());
 // All routes are here
 
 app.use("/api/user", userRoutes);
+app.use("/api", courseRoutes);
+app.use("/api", faqRoutes);
 
 app.get("/", (req, res) => res.send("API running"));
 
