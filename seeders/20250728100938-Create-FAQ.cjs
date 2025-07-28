@@ -4,23 +4,24 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert(
-      "users",
+      "faqs",
       [
         {
-          name: "John Doe",
-          email: "john@gmail.com",
-          password: "74107410",
-          age: 18,
-          phoneNumber: "6280500401",
+          ageRequired: "Leaner must be 18 years old or more.",
+          licenseType: "Learner's License",
+          courseDuration: "30 Days",
+          refundPolicy:
+            "Non-refundable after registration due to resource allocation.",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
       ],
+
       {}
     );
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("users", null, {});
+    await queryInterface.bulkDelete("faqs", null, {});
   },
 };

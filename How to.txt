@@ -7,6 +7,9 @@ npx sequelize-cli init
 npx sequelize-cli db:create
 
 
+6. Create model
+npx sequelize-cli model:generate --name Course --attributes name:string,slug:string,duration:string,fees:integer,description:string
+
 7. Run Migrations
 npm run db:migrate
 

@@ -1,24 +1,22 @@
+"use strict";
 import { Model } from "sequelize";
-
 export default (sequelize, DataTypes) => {
-  class Faq extends Model {
+  class FAQ extends Model {
     static associate(models) {
       // define association here
     }
   }
-
-  Faq.init(
+  FAQ.init(
     {
-      ageRequirement: DataTypes.STRING,
-      licenseType: DataTypes.STRING,
-      cousceDuration: DataTypes.STRING,
-      refundPolicy: DataTypes.STRING,
+      ageRequired: DataTypes.TEXT,
+      licenseType: DataTypes.TEXT,
+      courseDuration: DataTypes.TEXT,
+      refundPolicy: DataTypes.TEXT,
     },
     {
       sequelize,
-      modelName: "Faq",
+      modelName: "FAQ",
     }
   );
-
-  return Faq;
+  return FAQ;
 };
