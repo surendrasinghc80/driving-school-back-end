@@ -1,11 +1,16 @@
 "use strict";
 import { Model } from "sequelize";
+
 export default (sequelize, DataTypes) => {
   class Course extends Model {
     static associate(models) {
-      // define association here
+      Course.hasMany(models.Bookings, {
+        foreignKey: "courseId",
+        as: "bookings",
+      });
     }
   }
+
   Course.init(
     {
       name: DataTypes.STRING,
@@ -17,7 +22,9 @@ export default (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Course",
+      tableName: "Courses", // Optional: makes sure table name is pluralized consistently
     }
   );
+
   return Course;
 };
