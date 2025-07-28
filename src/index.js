@@ -1,5 +1,5 @@
 import express from "express";
-import { sequelize } from "./models/index.js"; // Now works
+import { sequelize } from "./models/index.js";
 import cors from "cors";
 import dotenv from "dotenv";
 

@@ -1,10 +1,9 @@
-import { Model, DataTypes } from "sequelize";
+import { Model } from "sequelize";
 
-export default (sequelize) => {
+export default (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      // Define associations here, for example:
-      // User.hasMany(models.Post);
+      // define association here
     }
   }
 
@@ -23,7 +22,6 @@ export default (sequelize) => {
     {
       sequelize,
       modelName: "User",
-      tableName: "users",
     }
   );
 

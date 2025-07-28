@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import Sequelize from "sequelize";
 import process from "process";
-import { fileURLToPath } from "url";
+import { fileURLToPath, pathToFileURL } from "url";
 import configFile from "../config/config.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -36,7 +36,7 @@ const files = fs
   );
 
 for (const file of files) {
-  const modelModule = await import(path.join(__dirname, file));
+  const modelModule = await import(pathToFileURL(path.join(__dirname, file)));
   const model = modelModule.default(sequelize, Sequelize.DataTypes);
   db[model.name] = model;
 }
@@ -47,6 +47,5 @@ Object.keys(db).forEach((modelName) => {
   }
 });
 
-// Export sequelize and db as named exports
 export { sequelize, Sequelize };
 export default db;
