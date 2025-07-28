@@ -18,6 +18,7 @@ export default (sequelize, DataTypes) => {
         defaultValue: "user",
       },
       age: DataTypes.INTEGER,
+      phoneNumber: DataTypes.BIGINT,
     },
     {
       sequelize,
