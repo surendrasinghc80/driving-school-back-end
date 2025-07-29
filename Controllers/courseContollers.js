@@ -18,8 +18,8 @@ export const addCourse = async (req, res) => {
     res.status(201).json({
       success: true,
       status: 201,
-      message: "Course created Syccessfully",
-      course,
+      message: "Course created Successfully",
+      // course,
     });
   } catch (error) {
     res.status(400).json({
@@ -50,7 +50,7 @@ export const editCourse = async (req, res) => {
       success: true,
       status: 200,
       message: "Course updated successfully",
-      course,
+      // course,
     });
   } catch (error) {
     res.status(400).json({

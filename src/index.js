@@ -6,6 +6,8 @@ import userRoutes from "../routes/userRoutes.js";
 import courseRoutes from "../routes/courseRoutes.js";
 import faqRoutes from "../routes/faqRoutes.js";
 import testimonialRoutes from "../routes/testimonialRoutes.js";
+import bookingRoutes from "../routes/bookingRoutes.js";
+import enquiryRoutes from "../routes/enquiryRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -19,6 +21,8 @@ app.use("/api/user", userRoutes);
 app.use("/api", courseRoutes);
 app.use("/api", faqRoutes);
 app.use("/api", testimonialRoutes);
+app.use("/api", bookingRoutes);
+app.use("/api", enquiryRoutes);
 
 app.get("/", (req, res) => res.send("API running"));
 

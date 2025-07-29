@@ -22,7 +22,7 @@ export default (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Course",
-      tableName: "Courses", // Optional: makes sure table name is pluralized consistently
+      tableName: "courses",
     }
   );
 

@@ -39,6 +39,8 @@ export const register = async (req, res) => {
         role: user.role,
         phoneNumber: user.phoneNumber,
         age: user.age,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
       },
     });
   } catch (error) {

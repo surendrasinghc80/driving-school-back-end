@@ -1,15 +1,13 @@
+// src/models/bookings.js
 "use strict";
 import { Model } from "sequelize";
 
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   class Bookings extends Model {
     static associate(models) {
-      // Bookings belong to one Course
-      Bookings.belongsTo(models.Courses, {
+      Bookings.belongsTo(models.Course, {
         foreignKey: "courseId",
-        as: "course", // optional alias
-        onDelete: "CASCADE", // optional behavior
-        onUpdate: "CASCADE",
+        as: "course",
       });
     }
   }
@@ -25,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Bookings",
+      tableName: "bookings",
     }
   );
 
