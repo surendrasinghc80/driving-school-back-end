@@ -16,7 +16,7 @@ export const addEnquiry = async (req, res) => {
     return res.status(201).json({
       status: 201,
       success: true,
-      message: "Enquiry created",
+      message: "Enquiry submitted",
       enqiry: newEnquiry,
     });
   } catch (error) {
@@ -24,5 +24,15 @@ export const addEnquiry = async (req, res) => {
     return res.status(500).json({
       message: "Internal Server Error",
     });
+  }
+};
+
+export const getEnquiry = async (req, res) => {
+  try {
+    const enquiry = await Enquiry.findAll();
+    res.status(200).json({ success: true, status: 200, enquiry });
+  } catch (error) {
+    console.error("Error fetching enquiry:", error);
+    res.status(500).json({ success: false, message: "Server Error" });
   }
 };

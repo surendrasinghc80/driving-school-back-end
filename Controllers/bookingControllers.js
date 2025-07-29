@@ -1,6 +1,13 @@
 import db from "../src/models/index.js";
+import { Op } from "sequelize";
 
 const { Course, Bookings } = db;
+
+const startOfDay = new Date();
+startOfDay.setHours(0, 0, 0, 0);
+
+const endOfDay = new Date();
+endOfDay.setHours(23, 59, 59, 999);
 
 export const addBooking = async (req, res) => {
   const { name, contact, courseId, date, time } = req.body;
@@ -9,6 +16,35 @@ export const addBooking = async (req, res) => {
     const course = await Course.findByPk(courseId);
     if (!course) {
       return res.status(404).json({ message: "Course not found" });
+    }
+
+    const existingNumber = await Bookings.findOne({
+      where: {
+        contact: req.body.contact,
+        createdAt: {
+          [Op.between]: [startOfDay, endOfDay],
+        },
+      },
+    });
+
+    if (existingNumber) {
+      return res.status(400).json({
+        message: "This number has already been used for booking today.",
+      });
+    }
+
+    // Combine `date` and `time` from request into a single Date object
+    const bookingDateTime = new Date(`${date}T${time}`);
+
+    // Get current date and time
+    const now = new Date();
+
+    // Validate: Disallow bookings in the past
+    if (bookingDateTime < now) {
+      return res.status(400).json({
+        success: false,
+        message: "Cannot book for past date and time.",
+      });
     }
 
     const newBooking = await Bookings.create({
@@ -35,8 +71,21 @@ export const addBooking = async (req, res) => {
 
 export const getBooking = async (req, res) => {
   try {
-    const bookings = await Bookings.findAll();
-    res.status(200).json({ success: true, status: 200, bookings });
+    const bookings = await Bookings.findAll({
+      include: [
+        {
+          model: Course,
+          as: "course",
+          attributes: ["name"], // only include course name
+        },
+      ],
+    });
+
+    res.status(200).json({
+      success: true,
+      status: 200,
+      bookings,
+    });
   } catch (error) {
     console.error("Error fetching bookings:", error);
     res.status(500).json({ success: false, message: "Server Error" });
