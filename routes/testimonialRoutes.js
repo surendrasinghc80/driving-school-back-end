@@ -10,7 +10,7 @@ const router = express.Router();
 
 // router.get("/courses", getAllCourses);
 router.post("/add-testimonial", addTestimonial);
-router.patch("/testimonial/:id", updateTestimonialStatus);
+router.put("/testimonial/:id", updateTestimonialStatus);
 router.get("/get-testimonial", getAcceptedTestimonials);
 router.get("/get-all-testimonials", getAllTestimonials);
 

@@ -88,7 +88,6 @@ export const updateTestimonialStatus = async (req, res) => {
       success: true,
       status: 200,
       message: "Testimonial status updated successfully",
-      // testimonial,
     });
   } catch (error) {
     res.status(500).json({
