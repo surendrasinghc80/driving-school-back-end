@@ -16,7 +16,6 @@ app.use(cors());
 app.use(express.json());
 
 // All routes are here
-
 app.use("/api/user", userRoutes);
 app.use("/api", courseRoutes);
 app.use("/api", faqRoutes);

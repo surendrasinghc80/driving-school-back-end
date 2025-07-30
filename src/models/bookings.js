@@ -16,6 +16,7 @@ export default (sequelize, DataTypes) => {
     {
       name: DataTypes.STRING,
       contact: DataTypes.BIGINT,
+      email:DataTypes.STRING,
       courseId: DataTypes.INTEGER,
       date: DataTypes.DATE,
       time: DataTypes.TIME,

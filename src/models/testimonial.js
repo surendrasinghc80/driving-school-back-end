@@ -16,6 +16,10 @@ export default (sequelize, DataTypes) => {
       reviewerName: DataTypes.STRING,
       stars: DataTypes.INTEGER,
       reveiw: DataTypes.TEXT,
+      status: {
+        type: DataTypes.ENUM("pending", "accepted", "rejected"),
+        defaultValue: "pending",
+      },
     },
     {
       sequelize,
