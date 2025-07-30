@@ -37,3 +37,64 @@ export const addFaqs = async (req, res) => {
     });
   }
 };
+
+export const editFaqs = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const faq = await Faqs.findByPk(id);
+
+    if (!faq) {
+      return res.status(404).json({
+        success: false,
+        status: 404,
+        message: "FAQ not found",
+      });
+    }
+
+    await faq.update(req.body);
+
+    res.status(200).json({
+      success: true,
+      status: 200,
+      message: "FAQ updated successfully",
+      faq,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      status: 400,
+      message: "Error updating FAQ",
+      error: error.message,
+    });
+  }
+};
+
+export const deleteFaqs = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const faqs = await Faqs.findByPk(id);
+
+    if (!faqs) {
+      return res.status(404).json({
+        success: false,
+        status: 404,
+        message: "FAQ not found",
+      });
+    }
+
+    await faqs.destroy();
+
+    res.status(200).json({
+      success: true,
+      status: 200,
+      message: "FAQ deleted successfully",
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      status: 400,
+      message: "Error deleting FAQ",
+      error: error.message,
+    });
+  }
+};

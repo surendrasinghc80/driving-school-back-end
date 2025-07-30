@@ -1,7 +1,7 @@
 import db from "../src/models/index.js";
 import { Op } from "sequelize";
 
-const {User, Course, Bookings } = db;
+const { User, Course, Bookings } = db;
 
 const startOfDay = new Date();
 startOfDay.setHours(0, 0, 0, 0);
@@ -77,7 +77,7 @@ export const getBooking = async (req, res) => {
         {
           model: Course,
           as: "course",
-          attributes: ["name"], // only include course name
+          attributes: ["name"], 
         },
       ],
     });
