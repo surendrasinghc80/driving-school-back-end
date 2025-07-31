@@ -71,3 +71,10 @@ driving-school-backend/
 ├── nodemon.json
 ├── package-lock.json
 └── package.json
+
+// THIS IS HOW TO SETUP THE PROJECT IN NEW MACHINE
+npm install
+npx sequelize-cli db:create
+npx sequelize-cli db:migrate
+npx sequelize-cli db:seed:all
+npm run dev

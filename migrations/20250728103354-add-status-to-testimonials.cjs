@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.addColumn("Testimonials", "status", {
+    await queryInterface.addColumn("testimonials", "status", {
       type: Sequelize.ENUM("accepted", "rejected", "pending"),
       allowNull: false,
       defaultValue: "pending",
@@ -11,7 +11,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.removeColumn("Testimonials", "status", {
+    await queryInterface.removeColumn("testimonials", "status", {
       type: Sequelize.ENUM,
     });
   },

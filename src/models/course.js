@@ -21,7 +21,7 @@ export default (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Course",
+      modelName: "courses",
       tableName: "courses",
     }
   );
