@@ -20,7 +20,8 @@ export default (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "enquiry",
+      modelName: "Enquiry",
+      tableName: "enquiries",
     }
   );
   return Enquiry;

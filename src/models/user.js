@@ -22,7 +22,8 @@ export default (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "user",
+      modelName: "User",
+      tableName: "users",
     }
   );
 

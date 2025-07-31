@@ -1,18 +1,17 @@
-// src/models/bookings.js
 "use strict";
 import { Model } from "sequelize";
 
 export default (sequelize, DataTypes) => {
-  class Bookings extends Model {
+  class Booking extends Model {
     static associate(models) {
-      Bookings.belongsTo(models.Course, {
+      Booking.belongsTo(models.Course, {
         foreignKey: "courseId",
         as: "course",
       });
     }
   }
 
-  Bookings.init(
+  Booking.init(
     {
       name: DataTypes.STRING,
       contact: DataTypes.BIGINT,
@@ -23,10 +22,10 @@ export default (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "bookings",
+      modelName: "Booking",
       tableName: "bookings",
     }
   );
 
-  return Bookings;
+  return Booking;
 };

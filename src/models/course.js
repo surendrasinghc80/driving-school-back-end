@@ -4,7 +4,8 @@ import { Model } from "sequelize";
 export default (sequelize, DataTypes) => {
   class Course extends Model {
     static associate(models) {
-      Course.hasMany(models.Bookings, {
+      Course.hasMany(models.Booking, {
+        // ✅ matches PascalCase in db
         foreignKey: "courseId",
         as: "bookings",
       });
@@ -21,7 +22,7 @@ export default (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "courses",
+      modelName: "Course",
       tableName: "courses",
     }
   );

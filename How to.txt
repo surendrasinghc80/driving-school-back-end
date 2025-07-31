@@ -25,9 +25,15 @@ npx sequelize-cli seed:generate --name demo-user
 11. Run the seeder:
 npm run db:seed
 
+11.5 Run the seeder for only secific file
+npx sequelize-cli db:seed --seed 20250731181932-faqs.cjs
+
 
 12. Undo seed:
 npm run db:seed:undo
+
+12.5 Undo any specific file 
+npx sequelize-cli db:seed:undo --seed 20250731181932-faqs.cjs
 
 --------------------------------------------------------------------
 

@@ -1,7 +1,7 @@
 import db from "../src/models/index.js";
 import { Op } from "sequelize";
 
-const { User, Course, Bookings } = db;
+const { User, Course, Booking } = db;
 
 const startOfDay = new Date();
 startOfDay.setHours(0, 0, 0, 0);
@@ -13,17 +13,15 @@ export const addBooking = async (req, res) => {
   const { name, contact, email, courseId, date, time } = req.body;
 
   try {
-    const course = await Course.findByPk(courseId);
-    if (!course) {
+    const foundCourse = await Course.findByPk(courseId);
+    if (!foundCourse) {
       return res.status(404).json({ message: "Course not found" });
     }
 
-    const existingNumber = await Bookings.findOne({
+    const existingNumber = await Booking.findOne({
       where: {
-        contact: req.body.contact,
-        createdAt: {
-          [Op.between]: [startOfDay, endOfDay],
-        },
+        contact,
+        createdAt: { [Op.between]: [startOfDay, endOfDay] },
       },
     });
 
@@ -36,18 +34,15 @@ export const addBooking = async (req, res) => {
     // Combine `date` and `time` from request into a single Date object
     const bookingDateTime = new Date(`${date}T${time}`);
 
-    // Get current date and time
-    const now = new Date();
-
     // Validate: Disallow bookings in the past
-    if (bookingDateTime < now) {
+    if (bookingDateTime < new Date()) {
       return res.status(400).json({
         success: false,
         message: "Cannot book for past date and time.",
       });
     }
 
-    const newBooking = await Bookings.create({
+    const newBooking = await Booking.create({
       name,
       contact,
       email,
@@ -60,32 +55,24 @@ export const addBooking = async (req, res) => {
       status: 201,
       success: true,
       message: "Booking created successfully",
-      bookings: newBooking,
+      booking: newBooking,
     });
   } catch (error) {
-    console.log("Error creating booking :", error);
-    return res.status(500).json({
-      message: "Internal Server Error",
-    });
+    console.log("Error creating booking:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
 export const getBooking = async (req, res) => {
   try {
-    const bookings = await Bookings.findAll({
-      include: [
-        {
-          model: Course,
-          as: "course",
-          attributes: ["name"], 
-        },
-      ],
+    const allBookings = await Booking.findAll({
+      include: [{ model: Course, as: "course", attributes: ["name"] }],
     });
 
     res.status(200).json({
       success: true,
       status: 200,
-      bookings,
+      bookings: allBookings,
     });
   } catch (error) {
     console.error("Error fetching bookings:", error);
@@ -97,25 +84,19 @@ export const getUserProfile = async (req, res) => {
   const { userId } = req.params;
 
   try {
-    const user = await User.findByPk(userId, {
+    const foundUser = await User.findByPk(userId, {
       attributes: { exclude: ["password"] },
     });
 
-    if (!user) {
+    if (!foundUser) {
       return res
         .status(404)
         .json({ success: false, message: "User not found" });
     }
 
-    const bookings = await Bookings.findAll({
-      where: { email: user.email },
-      include: [
-        {
-          model: Course,
-          as: "course",
-          attributes: ["name"],
-        },
-      ],
+    const userBookings = await Booking.findAll({
+      where: { email: foundUser.email },
+      include: [{ model: Course, as: "course", attributes: ["name"] }],
       order: [["createdAt", "DESC"]],
     });
 
@@ -123,8 +104,8 @@ export const getUserProfile = async (req, res) => {
       success: true,
       status: 200,
       message: "User profile fetched successfully",
-      user,
-      bookings,
+      user: foundUser,
+      bookings: userBookings,
     });
   } catch (error) {
     console.error("Error fetching user profile:", error);

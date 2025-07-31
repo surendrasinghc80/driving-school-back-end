@@ -1,10 +1,10 @@
 import db from "../src/models/index.js";
 
-const { Faqs } = db;
+const { Faq } = db;
 
 export const getAllFaqs = async (req, res) => {
   try {
-    const faqs = await Faqs.findAll();
+    const faqs = await Faq.findAll();
 
     res.status(200).json({
       success: true,
@@ -21,7 +21,7 @@ export const getAllFaqs = async (req, res) => {
 
 export const addFaqs = async (req, res) => {
   try {
-    const faqs = await Faqs.create(req.body);
+    const faqs = await Faq.create(req.body);
     res.status(201).json({
       success: true,
       status: 201,
@@ -41,7 +41,7 @@ export const addFaqs = async (req, res) => {
 export const editFaqs = async (req, res) => {
   try {
     const { id } = req.params;
-    const faq = await Faqs.findByPk(id);
+    const faq = await Faq.findByPk(id);
 
     if (!faq) {
       return res.status(404).json({
@@ -72,7 +72,7 @@ export const editFaqs = async (req, res) => {
 export const deleteFaqs = async (req, res) => {
   try {
     const { id } = req.params;
-    const faqs = await Faqs.findByPk(id);
+    const faqs = await Faq.findByPk(id);
 
     if (!faqs) {
       return res.status(404).json({
