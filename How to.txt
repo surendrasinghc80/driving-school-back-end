@@ -84,3 +84,7 @@ npx sequelize-cli db:create
 npx sequelize-cli db:migrate
 npx sequelize-cli db:seed:all
 npm run dev
+
+//OR
+//paste this command in the terminal
+npm i && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && npm run dev
