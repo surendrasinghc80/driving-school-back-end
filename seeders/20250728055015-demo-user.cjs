@@ -46,6 +46,7 @@ module.exports = {
           password: hashedPassword,
           age: 18,
           phoneNumber: "6280500401",
+          role: "admin",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
