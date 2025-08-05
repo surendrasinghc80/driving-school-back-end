@@ -66,7 +66,9 @@ export const addBooking = async (req, res) => {
 export const getBooking = async (req, res) => {
   try {
     const allBookings = await Booking.findAll({
-      include: [{ model: Course, as: "course", attributes: ["name"] }],
+      include: [
+        { model: Course, as: "course", attributes: ["name", "fees", "time"] },
+      ],
     });
 
     res.status(200).json({

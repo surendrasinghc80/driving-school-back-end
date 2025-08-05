@@ -18,6 +18,7 @@ export default (sequelize, DataTypes) => {
       slug: DataTypes.STRING,
       duration: DataTypes.STRING,
       fees: DataTypes.INTEGER,
+      time: DataTypes.STRING,
       description: DataTypes.TEXT,
     },
     {
